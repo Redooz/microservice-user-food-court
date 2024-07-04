@@ -1,5 +1,6 @@
 package com.pragma.userfoodcourt.application.dto.request;
 
+import com.pragma.userfoodcourt.application.constant.RequestConstants;
 import com.pragma.userfoodcourt.domain.model.Role;
 
 import javax.validation.constraints.Email;
@@ -8,30 +9,29 @@ import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 public record RegisterOwnerRequest(
-        @NotBlank(message = "Birth date is required")
+        @NotBlank(message = RequestConstants.MSG_BIRTH_DATE_REQUIRED)
         LocalDate birthDate,
 
-        @NotBlank(message = "Document ID is required")
+        @NotBlank(message = RequestConstants.MSG_DOCUMENT_ID_REQUIRED)
         Role role,
-
-        @NotBlank(message = "Document ID is required")
-        @Pattern(regexp = "^\\d+$", message = "Document ID must be a number")
+        @NotBlank(message = RequestConstants.MSG_DOCUMENT_ID_REQUIRED)
+        @Pattern(regexp = RequestConstants.REGEX_DOCUMENT_ID, message = RequestConstants.MSG_DOCUMENT_ID_NUMBER)
         String documentId,
 
-        @NotBlank(message = "Email is required")
-        @Email(message = "Invalid email")
+        @NotBlank(message = RequestConstants.MSG_EMAIL_REQUIRED)
+        @Email(message = RequestConstants.MSG_INVALID_EMAIL)
         String email,
 
-        @NotBlank(message = "Last name is required")
+        @NotBlank(message = RequestConstants.MSG_LAST_NAME_REQUIRED)
         String lastName,
 
-        @NotBlank(message = "Name is required")
+        @NotBlank(message = RequestConstants.MSG_NAME_REQUIRED)
         String name,
 
-        @NotBlank(message = "Password is required")String password,
+        @NotBlank(message = RequestConstants.MSG_PASSWORD_REQUIRED)
+        String password,
 
-        @NotBlank(message = "Phone is required")
-        @Pattern(regexp = "^\\+\\d{11,12}$", message = "Phone must be in the format +11234567890")
+        @NotBlank(message = RequestConstants.MSG_PHONE_REQUIRED)
+        @Pattern(regexp = RequestConstants.REGEX_PHONE, message = RequestConstants.MSG_PHONE_FORMAT)
         String phone
-    ){}
-
+){}

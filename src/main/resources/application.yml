@@ -1,7 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/foodcourt
+    url: jdbc:mysql://localhost/user-foodcourt
     username: ${DB_USER}
   jpa:
     hibernate:
       ddl-auto: update
+jwt:
+  secret: ${SECRET_KEY}

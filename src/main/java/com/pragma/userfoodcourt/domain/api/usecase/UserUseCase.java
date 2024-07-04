@@ -9,6 +9,10 @@ import com.pragma.userfoodcourt.domain.model.Role;
 import com.pragma.userfoodcourt.domain.model.User;
 import com.pragma.userfoodcourt.domain.spi.IUserPersistencePort;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
+
 public class UserUseCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
 
@@ -26,10 +30,14 @@ public class UserUseCase implements IUserServicePort {
             throw new UserDocumentIdExistsException(user.getDocumentId());
         }
 
-        if (user.getRole() == Role.OWNER && user.getBirthDate().isAfter(user.getBirthDate().plusYears(UserConstants.OWNER_MIN_AGE))) {
+        if (user.getRole() == Role.OWNER && !isAdult(user.getBirthDate())) {
             throw new OwnerNotAdultException();
         }
 
         userPersistencePort.saveUser(user);
+    }
+
+    private boolean isAdult(LocalDate birthDate) {
+        return birthDate.plusYears(UserConstants.OWNER_MIN_AGE).isBefore(ChronoLocalDate.from(LocalDateTime.now()));
     }
 }

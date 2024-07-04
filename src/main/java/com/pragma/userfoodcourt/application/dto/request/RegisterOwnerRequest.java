@@ -1,12 +1,14 @@
 package com.pragma.userfoodcourt.application.dto.request;
 
 import com.pragma.userfoodcourt.application.constant.RequestConstants;
+import lombok.Builder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
+@Builder
 public record RegisterOwnerRequest(
         LocalDate birthDate,
 

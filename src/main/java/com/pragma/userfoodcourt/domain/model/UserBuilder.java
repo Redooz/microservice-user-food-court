@@ -1,4 +1,4 @@
-package com.pragma.foodcourt.domain.model;
+package com.pragma.userfoodcourt.domain.model;
 
 import java.time.LocalDate;
 

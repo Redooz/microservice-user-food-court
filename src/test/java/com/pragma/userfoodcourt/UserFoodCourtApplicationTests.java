@@ -1,4 +1,4 @@
-package com.pragma.foodcourt;
+package com.pragma.userfoodcourt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

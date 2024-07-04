@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/foodcourt
+    username: ${DB_USER}
+  jpa:
+    hibernate:
+      ddl-auto: update

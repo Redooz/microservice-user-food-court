@@ -12,7 +12,7 @@ public class User {
     private String password;
     private String phone;
 
-    protected User(LocalDate birthDate, Role role, String documentId, String email, String lastName, String name, String password, String phone) {
+    public User(LocalDate birthDate, Role role, String documentId, String email, String lastName, String name, String password, String phone) {
         this.birthDate = birthDate;
         this.role = role;
         this.documentId = documentId;

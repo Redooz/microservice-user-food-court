@@ -17,7 +17,7 @@ import javax.validation.Valid;
 public class AuthRestControllerAdapter {
     private final AuthHandler authHandler;
 
-    @PostMapping("/register/admin")
+    @PostMapping("/register/owner")
     public ResponseEntity<Void> registerAdmin(@RequestBody @Valid RegisterOwnerRequest registerOwnerRequest) {
         authHandler.registerOwner(registerOwnerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();

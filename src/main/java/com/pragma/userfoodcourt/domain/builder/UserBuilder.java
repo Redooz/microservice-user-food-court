@@ -1,4 +1,7 @@
-package com.pragma.userfoodcourt.domain.model;
+package com.pragma.userfoodcourt.domain.builder;
+
+import com.pragma.userfoodcourt.domain.model.Role;
+import com.pragma.userfoodcourt.domain.model.User;
 
 import java.time.LocalDate;
 

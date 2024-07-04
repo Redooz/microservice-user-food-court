@@ -1,7 +1,6 @@
 package com.pragma.userfoodcourt.application.dto.request;
 
 import com.pragma.userfoodcourt.application.constant.RequestConstants;
-import com.pragma.userfoodcourt.domain.model.Role;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -9,11 +8,8 @@ import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 public record RegisterOwnerRequest(
-        @NotBlank(message = RequestConstants.MSG_BIRTH_DATE_REQUIRED)
         LocalDate birthDate,
 
-        @NotBlank(message = RequestConstants.MSG_DOCUMENT_ID_REQUIRED)
-        Role role,
         @NotBlank(message = RequestConstants.MSG_DOCUMENT_ID_REQUIRED)
         @Pattern(regexp = RequestConstants.REGEX_DOCUMENT_ID, message = RequestConstants.MSG_DOCUMENT_ID_NUMBER)
         String documentId,

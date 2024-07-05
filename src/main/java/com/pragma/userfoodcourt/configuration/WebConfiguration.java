@@ -9,7 +9,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*") // Or use "*" to allow all origins
+                .allowedOrigins("http://localhost:8081") // Or use "*" to allow all origins
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Authorization", "Cache-Control", "Content-Type")
                 .allowCredentials(true);

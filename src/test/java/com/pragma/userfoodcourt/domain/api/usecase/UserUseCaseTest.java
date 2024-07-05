@@ -1,6 +1,7 @@
 package com.pragma.userfoodcourt.domain.api.usecase;
 
 import com.pragma.userfoodcourt.domain.builder.UserBuilder;
+import com.pragma.userfoodcourt.domain.exception.NoDataFoundException;
 import com.pragma.userfoodcourt.domain.exception.OwnerNotAdultException;
 import com.pragma.userfoodcourt.domain.exception.UserDocumentIdExistsException;
 import com.pragma.userfoodcourt.domain.exception.UserEmailExistsException;
@@ -81,6 +82,32 @@ class UserUseCaseTest {
         when(userPersistencePort.findByDocumentId(user.getDocumentId())).thenReturn(Optional.empty());
 
         assertThrows(OwnerNotAdultException.class, () -> userUseCase.saveUser(user));
+    }
+
+    @Test
+    void findUserByDocumentIdSuccessfully() {
+        UserBuilder userBuilder = new UserBuilder();
+        User user = userBuilder.setEmail("test@email.com")
+                .setDocumentId("123456")
+                .createUser();
+
+        when(userPersistencePort.findByDocumentId(user.getDocumentId())).thenReturn(Optional.of(user));
+
+        userUseCase.findUserByDocumentId(user.getDocumentId());
+
+        verify(userPersistencePort, times(1)).findByDocumentId(user.getDocumentId());
+    }
+
+    @Test
+    void findUserByDocumentIdThrowsNoDataFoundException() {
+        UserBuilder userBuilder = new UserBuilder();
+        User user = userBuilder.setEmail("test@email.com")
+                .setDocumentId("123456")
+                .createUser();
+
+        when(userPersistencePort.findByDocumentId(user.getDocumentId())).thenReturn(Optional.empty());
+
+        assertThrows(NoDataFoundException.class, () -> userUseCase.findUserByDocumentId(user.getDocumentId()));
     }
 
 }

@@ -2,6 +2,7 @@ package com.pragma.userfoodcourt.domain.api.usecase;
 
 import com.pragma.userfoodcourt.domain.api.IUserServicePort;
 import com.pragma.userfoodcourt.domain.constant.UserConstants;
+import com.pragma.userfoodcourt.domain.exception.NoDataFoundException;
 import com.pragma.userfoodcourt.domain.exception.OwnerNotAdultException;
 import com.pragma.userfoodcourt.domain.exception.UserDocumentIdExistsException;
 import com.pragma.userfoodcourt.domain.exception.UserEmailExistsException;
@@ -36,6 +37,14 @@ public class UserUseCase implements IUserServicePort {
 
         userPersistencePort.saveUser(user);
     }
+
+    @Override
+    public User findUserByDocumentId(String documentId) {
+        return userPersistencePort.findByDocumentId(documentId)
+                .orElseThrow(() ->
+                        new NoDataFoundException(String.format(UserConstants.USER_NOT_FOUND_MESSAGE, documentId)));
+    }
+
 
     private boolean isAdult(LocalDate birthDate) {
         return birthDate.plusYears(UserConstants.OWNER_MIN_AGE).isBefore(ChronoLocalDate.from(LocalDateTime.now()));

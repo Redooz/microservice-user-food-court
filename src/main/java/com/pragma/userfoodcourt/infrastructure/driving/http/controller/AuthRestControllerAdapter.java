@@ -2,6 +2,8 @@ package com.pragma.userfoodcourt.infrastructure.driving.http.controller;
 
 import com.pragma.userfoodcourt.application.dto.request.RegisterOwnerRequest;
 import com.pragma.userfoodcourt.application.handler.AuthHandler;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,10 @@ public class AuthRestControllerAdapter {
     private final AuthHandler authHandler;
 
     @PostMapping("/register/owner")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Owner registered successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
+    })
     public ResponseEntity<Void> registerAdmin(@RequestBody @Valid RegisterOwnerRequest registerOwnerRequest) {
         authHandler.registerOwner(registerOwnerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();

@@ -82,4 +82,5 @@ class UserUseCaseTest {
 
         assertThrows(OwnerNotAdultException.class, () -> userUseCase.saveUser(user));
     }
+
 }

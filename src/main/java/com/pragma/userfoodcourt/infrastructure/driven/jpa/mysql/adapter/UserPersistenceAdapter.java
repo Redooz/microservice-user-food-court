@@ -4,17 +4,14 @@ import com.pragma.userfoodcourt.domain.model.User;
 import com.pragma.userfoodcourt.domain.spi.IUserPersistencePort;
 import com.pragma.userfoodcourt.infrastructure.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.pragma.userfoodcourt.infrastructure.driven.jpa.mysql.repository.IUserRepository;
+import lombok.AllArgsConstructor;
 
 import java.util.Optional;
 
+@AllArgsConstructor
 public class UserPersistenceAdapter implements IUserPersistencePort {
     private final IUserRepository userRepository;
     private final IUserEntityMapper userEntityMapper;
-
-    public UserPersistenceAdapter(IUserRepository userRepository, IUserEntityMapper userEntityMapper) {
-        this.userRepository = userRepository;
-        this.userEntityMapper = userEntityMapper;
-    }
 
     @Override
     public void saveUser(User user) {

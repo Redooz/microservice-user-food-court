@@ -1,5 +1,6 @@
 package com.pragma.userfoodcourt.infrastructure.driven.jpa.mysql.adapter;
 
+import com.pragma.userfoodcourt.domain.model.Role;
 import com.pragma.userfoodcourt.domain.model.User;
 import com.pragma.userfoodcourt.domain.spi.IUserPersistencePort;
 import com.pragma.userfoodcourt.infrastructure.driven.jpa.mysql.mapper.IUserEntityMapper;
@@ -26,5 +27,10 @@ public class UserPersistenceAdapter implements IUserPersistencePort {
     @Override
     public Optional<User> findByDocumentId(String documentId) {
         return userRepository.findById(documentId).map(userEntityMapper::toModel);
+    }
+
+    @Override
+    public Optional<User> findByRole(Role role) {
+        return userRepository.findByRole(role).map(userEntityMapper::toModel);
     }
 }

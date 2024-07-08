@@ -13,6 +13,7 @@ import com.pragma.userfoodcourt.domain.spi.IUserPersistencePort;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
+import java.util.Optional;
 
 public class UserUseCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
@@ -50,6 +51,11 @@ public class UserUseCase implements IUserServicePort {
         return userPersistencePort.findByEmail(email)
                 .orElseThrow(() ->
                         new NoDataFoundException(String.format(UserConstants.USER_NOT_FOUND_MESSAGE, email)));
+    }
+
+    @Override
+    public Optional<User> findUserByRole(Role role) {
+        return userPersistencePort.findByRole(role);
     }
 
 

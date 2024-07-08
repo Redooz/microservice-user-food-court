@@ -1,5 +1,6 @@
 package com.pragma.userfoodcourt.infrastructure.driving.http.exceptionhandler;
 
+import com.pragma.userfoodcourt.domain.exception.InvalidPasswordException;
 import com.pragma.userfoodcourt.domain.exception.OwnerNotAdultException;
 import com.pragma.userfoodcourt.domain.exception.UserDocumentIdExistsException;
 import com.pragma.userfoodcourt.domain.exception.UserEmailExistsException;
@@ -44,5 +45,14 @@ public class AuthControllerAdvisor {
         return ResponseEntity.badRequest().body(response);
     }
 
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidPasswordException(InvalidPasswordException e) {
+        ExceptionResponse response = new ExceptionResponse(
+                e.getMessage(),
+                HttpStatus.BAD_REQUEST.toString(),
+                LocalDateTime.now()
+        );
+        return ResponseEntity.badRequest().body(response);
+    }
 
 }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.pragma.userfoodcourt.domain.api.IJwtServicePort;
 import com.pragma.userfoodcourt.domain.api.IUserServicePort;
 import com.pragma.userfoodcourt.domain.builder.UserBuilder;
+import com.pragma.userfoodcourt.domain.exception.InvalidPasswordException;
 import com.pragma.userfoodcourt.domain.model.Role;
 import com.pragma.userfoodcourt.domain.model.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +25,7 @@ class AuthUseCaseTest {
     public void setUp() {
         userServicePort = mock(IUserServicePort.class);
         passwordEncoder = mock(PasswordEncoder.class);
+        jwtServicePort = mock(IJwtServicePort.class);
         authUseCase = new AuthUseCase(userServicePort, passwordEncoder, jwtServicePort);
     }
 
@@ -48,5 +50,33 @@ class AuthUseCaseTest {
         User capturedUser = userCaptor.getValue();
         assertEquals(encodedPassword, capturedUser.getPassword());
         assertEquals(Role.OWNER, capturedUser.getRole());
+    }
+
+    @Test
+    void loginSuccessfully() {
+        // Arrange
+        User user = new UserBuilder().setPassword("rawPassword").createUser();
+        when(userServicePort.findUserByEmail("email")).thenReturn(user);
+        when(passwordEncoder.matches("rawPassword", user.getPassword())).thenReturn(true);
+
+        String token = "token";
+        when(jwtServicePort.generateToken(user)).thenReturn(token);
+
+        // Act
+        String result = authUseCase.login("email", "rawPassword");
+
+        // Assert
+        assertEquals(token, result);
+    }
+
+    @Test
+    void loginWithInvalidPassword() {
+        // Arrange
+        User user = new UserBuilder().setPassword("rawPassword").createUser();
+        when(userServicePort.findUserByEmail("email")).thenReturn(user);
+        when(passwordEncoder.matches("rawPassword", user.getPassword())).thenReturn(false);
+
+        // Act & Assert
+        assertThrows(InvalidPasswordException.class, () -> authUseCase.login("email", "rawPassword"));
     }
 }

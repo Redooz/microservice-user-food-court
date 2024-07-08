@@ -1,4 +1,4 @@
-package com.pragma.userfoodcourt.configuration.service;
+package com.pragma.userfoodcourt.configuration.security.service;
 
 import com.pragma.userfoodcourt.domain.api.IJwtServicePort;
 import com.pragma.userfoodcourt.domain.model.Role;

@@ -1,6 +1,6 @@
 package com.pragma.userfoodcourt.configuration;
 
-import com.pragma.userfoodcourt.configuration.service.JwtService;
+import com.pragma.userfoodcourt.configuration.security.service.JwtService;
 import com.pragma.userfoodcourt.domain.api.IAuthServicePort;
 import com.pragma.userfoodcourt.domain.api.IJwtServicePort;
 import com.pragma.userfoodcourt.domain.api.IUserServicePort;

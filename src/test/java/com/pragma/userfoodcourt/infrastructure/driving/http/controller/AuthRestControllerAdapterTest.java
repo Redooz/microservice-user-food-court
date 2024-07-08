@@ -40,7 +40,7 @@ class AuthRestControllerAdapterTest {
                 .password("password")
                 .phone("123456")
                 .build();
-        ResponseEntity<Void> response = authRestControllerAdapter.registerAdmin(registerOwnerRequest);
+        ResponseEntity<Void> response = authRestControllerAdapter.registerOwner(registerOwnerRequest);
 
         verify(authHandler, times(1)).registerOwner(registerOwnerRequest);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());

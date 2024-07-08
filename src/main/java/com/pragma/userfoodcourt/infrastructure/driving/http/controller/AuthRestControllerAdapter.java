@@ -6,6 +6,7 @@ import com.pragma.userfoodcourt.application.dto.response.AuthResponse;
 import com.pragma.userfoodcourt.application.handler.AuthHandler;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,8 @@ public class AuthRestControllerAdapter {
             @ApiResponse(responseCode = "201", description = "Owner registered successfully"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<Void> registerAdmin(@RequestBody @Valid RegisterOwnerRequest registerOwnerRequest) {
+    @SecurityRequirement(name = "bearer-key")
+    public ResponseEntity<Void> registerOwner(@RequestBody @Valid RegisterOwnerRequest registerOwnerRequest) {
         authHandler.registerOwner(registerOwnerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

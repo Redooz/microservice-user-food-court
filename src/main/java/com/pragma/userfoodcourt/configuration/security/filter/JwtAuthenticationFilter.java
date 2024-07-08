@@ -1,6 +1,6 @@
-package com.pragma.userfoodcourt.configuration.filter;
+package com.pragma.userfoodcourt.configuration.security.filter;
 
-import com.pragma.userfoodcourt.configuration.service.JwtService;
+import com.pragma.userfoodcourt.configuration.security.service.JwtService;
 import com.pragma.userfoodcourt.domain.model.Role;
 import com.pragma.userfoodcourt.infrastructure.driven.jpa.mysql.entity.UserEntity;
 import lombok.RequiredArgsConstructor;

@@ -45,6 +45,13 @@ public class UserUseCase implements IUserServicePort {
                         new NoDataFoundException(String.format(UserConstants.USER_NOT_FOUND_MESSAGE, documentId)));
     }
 
+    @Override
+    public User findUserByEmail(String email) {
+        return userPersistencePort.findByEmail(email)
+                .orElseThrow(() ->
+                        new NoDataFoundException(String.format(UserConstants.USER_NOT_FOUND_MESSAGE, email)));
+    }
+
 
     private boolean isAdult(LocalDate birthDate) {
         return birthDate.plusYears(UserConstants.OWNER_MIN_AGE).isBefore(ChronoLocalDate.from(LocalDateTime.now()));

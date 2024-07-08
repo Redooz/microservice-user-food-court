@@ -3,6 +3,7 @@ package com.pragma.userfoodcourt.domain.api.usecase;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.pragma.userfoodcourt.domain.api.IJwtServicePort;
 import com.pragma.userfoodcourt.domain.api.IUserServicePort;
 import com.pragma.userfoodcourt.domain.builder.UserBuilder;
 import com.pragma.userfoodcourt.domain.model.Role;
@@ -16,13 +17,14 @@ class AuthUseCaseTest {
 
     private IUserServicePort userServicePort;
     private PasswordEncoder passwordEncoder;
+    private IJwtServicePort jwtServicePort;
     private AuthUseCase authUseCase;
 
     @BeforeEach
     public void setUp() {
         userServicePort = mock(IUserServicePort.class);
         passwordEncoder = mock(PasswordEncoder.class);
-        authUseCase = new AuthUseCase(userServicePort, passwordEncoder);
+        authUseCase = new AuthUseCase(userServicePort, passwordEncoder, jwtServicePort);
     }
 
     @Test

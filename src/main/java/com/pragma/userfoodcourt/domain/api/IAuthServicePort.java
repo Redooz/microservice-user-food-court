@@ -4,4 +4,6 @@ import com.pragma.userfoodcourt.domain.model.User;
 
 public interface IAuthServicePort {
     void registerRestaurantOwner(User user);
+
+    void login(String email, String password);
 }

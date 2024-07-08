@@ -1,5 +1,6 @@
 package com.pragma.userfoodcourt.configuration.service;
 
+import com.pragma.userfoodcourt.domain.api.IJwtServicePort;
 import com.pragma.userfoodcourt.domain.model.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -15,7 +16,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
+public class JwtService implements IJwtServicePort {
     @Value("${jwt.secret}")
     private String secretKey;
 

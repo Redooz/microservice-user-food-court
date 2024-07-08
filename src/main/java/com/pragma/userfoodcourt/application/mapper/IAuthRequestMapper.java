@@ -8,5 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface IAuthRequestMapper {
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "authorities", ignore = true)
     User toModel(RegisterOwnerRequest registerOwnerRequest);
 }

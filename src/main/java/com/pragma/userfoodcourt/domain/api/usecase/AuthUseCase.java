@@ -29,7 +29,7 @@ public class AuthUseCase implements IAuthServicePort {
     }
 
     @Override
-    public void login(String email, String password) {
+    public String login(String email, String password) {
         User user = userServicePort.findUserByEmail(email);
         boolean isPasswordMatch = passwordEncoder.matches(password, user.getPassword());
 
@@ -37,6 +37,6 @@ public class AuthUseCase implements IAuthServicePort {
             throw new InvalidPasswordException(AuthConstants.INVALID_PASSWORD_EXCEPTION_MESSAGE);
         }
 
-        jwtServicePort.generateToken(user);
+        return jwtServicePort.generateToken(user);
     }
 }

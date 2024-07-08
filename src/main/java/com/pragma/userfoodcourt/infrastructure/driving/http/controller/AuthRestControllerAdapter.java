@@ -1,6 +1,8 @@
 package com.pragma.userfoodcourt.infrastructure.driving.http.controller;
 
+import com.pragma.userfoodcourt.application.dto.request.LoginRequest;
 import com.pragma.userfoodcourt.application.dto.request.RegisterOwnerRequest;
+import com.pragma.userfoodcourt.application.dto.response.AuthResponse;
 import com.pragma.userfoodcourt.application.handler.AuthHandler;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -27,5 +29,14 @@ public class AuthRestControllerAdapter {
     public ResponseEntity<Void> registerAdmin(@RequestBody @Valid RegisterOwnerRequest registerOwnerRequest) {
         authHandler.registerOwner(registerOwnerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/login")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User logged in"),
+            @ApiResponse(responseCode = "400", description = "Invalid data"),
+    })
+    public ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequest registerUserRequest) {
+        return ResponseEntity.ok(authHandler.login(registerUserRequest));
     }
 }

@@ -1,12 +1,11 @@
 package com.pragma.userfoodcourt.application.constant;
 
-public class RequestConstants {
-    private RequestConstants() {
+public class AuthReqConstants {
+    private AuthReqConstants() {
         throw new IllegalStateException("Utility class");
     }
 
     // Validation messages
-    public static final String MSG_BIRTH_DATE_REQUIRED = "Birth date is required";
     public static final String MSG_DOCUMENT_ID_REQUIRED = "Document ID is required";
     public static final String MSG_DOCUMENT_ID_NUMBER = "Document ID must be a number";
     public static final String MSG_EMAIL_REQUIRED = "Email is required";

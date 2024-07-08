@@ -5,7 +5,7 @@ public class UserConstants {
         throw new IllegalStateException("Utility class");
     }
 
-    public static final String USER_NOT_FOUND_MESSAGE = "User with document id %s not found";
+    public static final String USER_NOT_FOUND_MESSAGE = "User with document id or email  %s not found";
 
     public static final String USER_EMAIL_EXISTS_MESSAGE = "User with email %s already exists";
     public static final String USER_DOCUMENT_ID_EXISTS_MESSAGE = "User with document id %s already exists";

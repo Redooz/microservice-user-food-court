@@ -1,6 +1,8 @@
 package com.pragma.userfoodcourt.configuration;
 
+import com.pragma.userfoodcourt.configuration.service.JwtService;
 import com.pragma.userfoodcourt.domain.api.IAuthServicePort;
+import com.pragma.userfoodcourt.domain.api.IJwtServicePort;
 import com.pragma.userfoodcourt.domain.api.IUserServicePort;
 import com.pragma.userfoodcourt.domain.api.usecase.AuthUseCase;
 import com.pragma.userfoodcourt.domain.api.usecase.UserUseCase;
@@ -30,10 +32,16 @@ public class AuthBeanConfiguration {
     }
 
     @Bean
+    public IJwtServicePort jwtServicePort() {
+        return new JwtService();
+    }
+
+    @Bean
     public IAuthServicePort authServicePort() {
         return new AuthUseCase(
                 userServicePort(),
-                applicationBeanConfig.passwordEncoder()
+                applicationBeanConfig.passwordEncoder(),
+                jwtServicePort()
         );
     }
 }

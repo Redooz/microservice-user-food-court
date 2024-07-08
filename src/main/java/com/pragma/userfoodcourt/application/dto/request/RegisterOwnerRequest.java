@@ -1,6 +1,6 @@
 package com.pragma.userfoodcourt.application.dto.request;
 
-import com.pragma.userfoodcourt.application.constant.RequestConstants;
+import com.pragma.userfoodcourt.application.constant.AuthReqConstants;
 import lombok.Builder;
 
 import javax.validation.constraints.Email;
@@ -12,24 +12,24 @@ import java.time.LocalDate;
 public record RegisterOwnerRequest(
         LocalDate birthDate,
 
-        @NotBlank(message = RequestConstants.MSG_DOCUMENT_ID_REQUIRED)
-        @Pattern(regexp = RequestConstants.REGEX_DOCUMENT_ID, message = RequestConstants.MSG_DOCUMENT_ID_NUMBER)
+        @NotBlank(message = AuthReqConstants.MSG_DOCUMENT_ID_REQUIRED)
+        @Pattern(regexp = AuthReqConstants.REGEX_DOCUMENT_ID, message = AuthReqConstants.MSG_DOCUMENT_ID_NUMBER)
         String documentId,
 
-        @NotBlank(message = RequestConstants.MSG_EMAIL_REQUIRED)
-        @Email(message = RequestConstants.MSG_INVALID_EMAIL)
+        @NotBlank(message = AuthReqConstants.MSG_EMAIL_REQUIRED)
+        @Email(message = AuthReqConstants.MSG_INVALID_EMAIL)
         String email,
 
-        @NotBlank(message = RequestConstants.MSG_LAST_NAME_REQUIRED)
+        @NotBlank(message = AuthReqConstants.MSG_LAST_NAME_REQUIRED)
         String lastName,
 
-        @NotBlank(message = RequestConstants.MSG_NAME_REQUIRED)
+        @NotBlank(message = AuthReqConstants.MSG_NAME_REQUIRED)
         String name,
 
-        @NotBlank(message = RequestConstants.MSG_PASSWORD_REQUIRED)
+        @NotBlank(message = AuthReqConstants.MSG_PASSWORD_REQUIRED)
         String password,
 
-        @NotBlank(message = RequestConstants.MSG_PHONE_REQUIRED)
-        @Pattern(regexp = RequestConstants.REGEX_PHONE, message = RequestConstants.MSG_PHONE_FORMAT)
+        @NotBlank(message = AuthReqConstants.MSG_PHONE_REQUIRED)
+        @Pattern(regexp = AuthReqConstants.REGEX_PHONE, message = AuthReqConstants.MSG_PHONE_FORMAT)
         String phone
 ){}

@@ -1,11 +1,13 @@
 package com.pragma.userfoodcourt.application.dto.request;
 
 import com.pragma.userfoodcourt.application.constant.AuthReqConstants;
+import lombok.Builder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+@Builder
 public record RegisterCustomerRequest(
         @NotBlank(message = AuthReqConstants.MSG_DOCUMENT_ID_REQUIRED)
         @Pattern(regexp = AuthReqConstants.REGEX_DOCUMENT_ID, message = AuthReqConstants.MSG_DOCUMENT_ID_NUMBER)

@@ -33,17 +33,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         final String token = authHeader.substring(7);
 
-        final String userEmail = jwtService.getUsernameFromToken(token);
+        final String userId = jwtService.getUsernameFromToken(token);
 
         final Role role = jwtService.getRoleFromToken(token);
 
-        if (userEmail == null || SecurityContextHolder.getContext().getAuthentication() != null) {
+        if (userId == null || SecurityContextHolder.getContext().getAuthentication() != null) {
             filterChain.doFilter(request, response);
             return;
         }
 
         UserDetails userDetails = UserEntity.builder()
-                .email(userEmail)
+                .documentId(userId)
                 .role(role)
                 .build();
 

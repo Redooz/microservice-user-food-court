@@ -110,4 +110,39 @@ class UserUseCaseTest {
         assertThrows(NoDataFoundException.class, () -> userUseCase.findUserByDocumentId(user.getDocumentId()));
     }
 
+    @Test
+    void findUserByEmailSuccessfully() {
+        UserBuilder userBuilder = new UserBuilder();
+        User user = userBuilder.setEmail("test@email.com")
+                .setDocumentId("123456")
+                .createUser();
+
+        when(userPersistencePort.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
+
+        userUseCase.findUserByEmail(user.getEmail());
+
+        verify(userPersistencePort, times(1)).findByEmail(user.getEmail());
+    }
+
+    @Test
+    void findUserByEmailThrowsNoDataFoundException() {
+        UserBuilder userBuilder = new UserBuilder();
+        User user = userBuilder.setEmail("test@email.com")
+                .setDocumentId("123456")
+                .createUser();
+
+        when(userPersistencePort.findByEmail(user.getEmail())).thenReturn(Optional.empty());
+
+        assertThrows(NoDataFoundException.class, () -> userUseCase.findUserByEmail(user.getEmail()));
+    }
+
+    @Test
+    void findUserByRoleSuccessfully() {
+        Role role = Role.OWNER;
+
+        userUseCase.findUserByRole(role);
+
+        verify(userPersistencePort, times(1)).findByRole(role);
+    }
+
 }

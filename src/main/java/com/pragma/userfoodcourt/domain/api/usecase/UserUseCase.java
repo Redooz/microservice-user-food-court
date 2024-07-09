@@ -58,7 +58,6 @@ public class UserUseCase implements IUserServicePort {
         return userPersistencePort.findByRole(role);
     }
 
-
     private boolean isAdult(LocalDate birthDate) {
         return birthDate.plusYears(UserConstants.OWNER_MIN_AGE).isBefore(ChronoLocalDate.from(LocalDateTime.now()));
     }

@@ -5,6 +5,6 @@ import com.pragma.userfoodcourt.domain.model.User;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface IUserRequestMapper {
+public interface IUserDtoMapper {
     GetUserResponse toResponse(User user);
 }

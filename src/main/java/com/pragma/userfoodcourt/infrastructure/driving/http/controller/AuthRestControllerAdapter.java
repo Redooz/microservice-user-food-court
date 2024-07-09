@@ -26,7 +26,8 @@ public class AuthRestControllerAdapter {
     @PostMapping("/register/owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Owner registered successfully"),
-            @ApiResponse(responseCode = "400", description = "Bad Request")
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Void> registerOwner(@RequestBody @Valid RegisterOwnerRequest registerOwnerRequest) {
@@ -37,7 +38,8 @@ public class AuthRestControllerAdapter {
     @PostMapping("/register/employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Employee registered successfully"),
-            @ApiResponse(responseCode = "400", description = "Bad Request")
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Void> registerEmployee(@RequestBody @Valid RegisterEmployeeRequest registerOwnerRequest) {

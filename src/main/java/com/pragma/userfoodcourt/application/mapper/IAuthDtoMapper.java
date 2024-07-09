@@ -14,5 +14,6 @@ public interface IAuthDtoMapper {
 
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "birthDate", ignore = true)
     User toModelFromRegisterEmployeeReq(RegisterEmployeeRequest registerEmployeeRequest);
 }

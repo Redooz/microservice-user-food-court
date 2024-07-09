@@ -1,6 +1,7 @@
 package com.pragma.userfoodcourt.infrastructure.driving.http.controller;
 
 import com.pragma.userfoodcourt.application.dto.request.LoginRequest;
+import com.pragma.userfoodcourt.application.dto.request.RegisterCustomerRequest;
 import com.pragma.userfoodcourt.application.dto.request.RegisterEmployeeRequest;
 import com.pragma.userfoodcourt.application.dto.request.RegisterOwnerRequest;
 import com.pragma.userfoodcourt.application.dto.response.AuthResponse;
@@ -60,6 +61,22 @@ class AuthRestControllerAdapterTest {
         ResponseEntity<Void> response = authRestControllerAdapter.registerEmployee(registerEmployeeRequest);
 
         verify(authHandler, times(1)).registerEmployee(registerEmployeeRequest);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
+
+    @Test
+    void registerCustomerReturnsCreatedStatus() {
+        RegisterCustomerRequest registerCustomerRequest = RegisterCustomerRequest.builder()
+                .documentId("123456")
+                .email("test@test.com")
+                .lastName("lastName")
+                .name("name")
+                .password("password")
+                .phone("123456")
+                .build();
+        ResponseEntity<Void> response = authRestControllerAdapter.registerCustomer(registerCustomerRequest);
+
+        verify(authHandler, times(1)).registerCustomer(registerCustomerRequest);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 

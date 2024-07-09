@@ -1,6 +1,7 @@
 package com.pragma.userfoodcourt.infrastructure.driving.http.controller;
 
 import com.pragma.userfoodcourt.application.dto.request.LoginRequest;
+import com.pragma.userfoodcourt.application.dto.request.RegisterCustomerRequest;
 import com.pragma.userfoodcourt.application.dto.request.RegisterEmployeeRequest;
 import com.pragma.userfoodcourt.application.dto.request.RegisterOwnerRequest;
 import com.pragma.userfoodcourt.application.dto.response.AuthResponse;
@@ -44,6 +45,16 @@ public class AuthRestControllerAdapter {
     @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Void> registerEmployee(@RequestBody @Valid RegisterEmployeeRequest registerOwnerRequest) {
         authHandler.registerEmployee(registerOwnerRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/register/customer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Customer registered successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
+    })
+    public ResponseEntity<Void> registerCustomer(@RequestBody @Valid RegisterCustomerRequest registerCustomerRequest) {
+        authHandler.registerCustomer(registerCustomerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

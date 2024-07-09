@@ -1,6 +1,7 @@
 package com.pragma.userfoodcourt.application.handler;
 
 import com.pragma.userfoodcourt.application.dto.request.LoginRequest;
+import com.pragma.userfoodcourt.application.dto.request.RegisterCustomerRequest;
 import com.pragma.userfoodcourt.application.dto.request.RegisterEmployeeRequest;
 import com.pragma.userfoodcourt.application.dto.request.RegisterOwnerRequest;
 import com.pragma.userfoodcourt.application.dto.response.AuthResponse;
@@ -22,6 +23,10 @@ public class AuthHandler {
 
     public void registerEmployee(RegisterEmployeeRequest request) {
         authServicePort.registerUser(authRequestMapper.toModelFromRegisterEmployeeReq(request), Role.EMPLOYEE);
+    }
+
+    public void registerCustomer(RegisterCustomerRequest request) {
+        authServicePort.registerUser(authRequestMapper.toModelFromRegisterCustomerReq(request), Role.CUSTOMER);
     }
 
     public AuthResponse login(LoginRequest request) {

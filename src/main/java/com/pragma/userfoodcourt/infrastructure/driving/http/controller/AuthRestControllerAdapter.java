@@ -1,6 +1,7 @@
 package com.pragma.userfoodcourt.infrastructure.driving.http.controller;
 
 import com.pragma.userfoodcourt.application.dto.request.LoginRequest;
+import com.pragma.userfoodcourt.application.dto.request.RegisterEmployeeRequest;
 import com.pragma.userfoodcourt.application.dto.request.RegisterOwnerRequest;
 import com.pragma.userfoodcourt.application.dto.response.AuthResponse;
 import com.pragma.userfoodcourt.application.handler.AuthHandler;
@@ -25,11 +26,24 @@ public class AuthRestControllerAdapter {
     @PostMapping("/register/owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Owner registered successfully"),
-            @ApiResponse(responseCode = "400", description = "Bad Request")
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Void> registerOwner(@RequestBody @Valid RegisterOwnerRequest registerOwnerRequest) {
         authHandler.registerOwner(registerOwnerRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/register/employee")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Employee registered successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    @SecurityRequirement(name = "bearer-key")
+    public ResponseEntity<Void> registerEmployee(@RequestBody @Valid RegisterEmployeeRequest registerOwnerRequest) {
+        authHandler.registerEmployee(registerOwnerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

@@ -30,26 +30,26 @@ class AuthUseCaseTest {
     }
 
     @Test
-    void registerRestaurantOwnerSuccessfully() {
+    void registerUserSuccessfully() {
         // Arrange
         User user = new UserBuilder().setPassword("rawPassword").createUser();
+        Role role = Role.OWNER;
 
         String encodedPassword = "encodedPassword";
         when(passwordEncoder.encode("rawPassword")).thenReturn(encodedPassword);
 
         // Act
-        authUseCase.registerRestaurantOwner(user);
+        authUseCase.registerUser(user, role);
 
         // Assert
         assertEquals(encodedPassword, user.getPassword());
-        assertEquals(Role.OWNER, user.getRole());
 
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         verify(userServicePort).saveUser(userCaptor.capture());
 
         User capturedUser = userCaptor.getValue();
         assertEquals(encodedPassword, capturedUser.getPassword());
-        assertEquals(Role.OWNER, capturedUser.getRole());
+        assertEquals(role, capturedUser.getRole());
     }
 
     @Test

@@ -21,9 +21,9 @@ public class AuthUseCase implements IAuthServicePort {
     }
 
     @Override
-    public void registerRestaurantOwner(User user) {
+    public void registerUser(User user, Role role) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.OWNER);
+        user.setRole(role);
 
         userServicePort.saveUser(user);
     }

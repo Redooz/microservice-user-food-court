@@ -16,7 +16,7 @@ public class ApplicationBeanConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return authBeanConfiguration.userServicePort()::findUserByEmail;
+        return authBeanConfiguration.userServicePort()::findUserByDocumentId;
     }
 
     @Bean

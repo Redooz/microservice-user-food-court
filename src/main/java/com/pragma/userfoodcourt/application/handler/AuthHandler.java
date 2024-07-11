@@ -8,7 +8,9 @@ import com.pragma.userfoodcourt.application.dto.response.AuthResponse;
 import com.pragma.userfoodcourt.application.mapper.IAuthDtoMapper;
 import com.pragma.userfoodcourt.domain.api.IAuthServicePort;
 import com.pragma.userfoodcourt.domain.model.Role;
+import com.pragma.userfoodcourt.domain.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +24,12 @@ public class AuthHandler {
     }
 
     public void registerEmployee(RegisterEmployeeRequest request) {
-        authServicePort.registerUser(authRequestMapper.toModelFromRegisterEmployeeReq(request), Role.EMPLOYEE);
+        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User employee = authRequestMapper.toModelFromRegisterEmployeeReq(request);
+
+        employee.setBoss(owner);
+
+        authServicePort.registerUser(employee, Role.EMPLOYEE);
     }
 
     public void registerCustomer(RegisterCustomerRequest request) {

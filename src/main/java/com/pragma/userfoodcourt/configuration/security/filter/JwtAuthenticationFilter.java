@@ -1,6 +1,7 @@
 package com.pragma.userfoodcourt.configuration.security.filter;
 
 import com.pragma.userfoodcourt.configuration.security.service.JwtService;
+import com.pragma.userfoodcourt.domain.builder.UserBuilder;
 import com.pragma.userfoodcourt.domain.model.Role;
 import com.pragma.userfoodcourt.infrastructure.driven.jpa.mysql.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
@@ -42,10 +43,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        UserDetails userDetails = UserEntity.builder()
-                .documentId(userId)
-                .role(role)
-                .build();
+        UserDetails userDetails = new UserBuilder()
+                .setDocumentId(userId)
+                .setRole(role)
+                .createUser();
 
         if (!jwtService.tokenIsValid(token, userDetails)) {
             filterChain.doFilter(request, response);

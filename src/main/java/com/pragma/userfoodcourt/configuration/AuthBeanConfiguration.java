@@ -13,13 +13,14 @@ import com.pragma.userfoodcourt.infrastructure.driven.jpa.mysql.repository.IUser
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
 public class AuthBeanConfiguration {
     private final IUserRepository userRepository;
     private final IUserEntityMapper userEntityMapper;
-    private final ApplicationBeanConfiguration applicationBeanConfig;
 
     @Bean
     public IUserPersistencePort userPersistencePort() {
@@ -40,8 +41,13 @@ public class AuthBeanConfiguration {
     public IAuthServicePort authServicePort() {
         return new AuthUseCase(
                 userServicePort(),
-                applicationBeanConfig.passwordEncoder(),
+                passwordEncoder(),
                 jwtServicePort()
         );
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

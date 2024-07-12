@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.POST, "/auth/register/employee").hasAnyAuthority(Role.OWNER.name())
                 .antMatchers(HttpMethod.POST, "/auth/register/customer").permitAll()
                 .antMatchers("/auth/login").permitAll()
-                .antMatchers("/users/**").hasAnyAuthority(Role.ADMIN.name(), Role.OWNER.name(), Role.EMPLOYEE.name())
+                .antMatchers("/users/**").hasAnyAuthority(Role.ADMIN.name(), Role.OWNER.name(), Role.EMPLOYEE.name(), Role.CUSTOMER.name())
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
